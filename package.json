@@ -1,0 +1,19 @@
+{
+  "name": "homework-9-advanced-js-constructor-hangman",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/youknowme786/Homework-9-Advanced-JS-Constructor-Hangman.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/youknowme786/Homework-9-Advanced-JS-Constructor-Hangman/issues"
+  },
+  "homepage": "https://github.com/youknowme786/Homework-9-Advanced-JS-Constructor-Hangman#readme"
+}
