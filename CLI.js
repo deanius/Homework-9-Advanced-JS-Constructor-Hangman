@@ -1,6 +1,6 @@
 var inquirer = require("inquirer");
 var colors = require("colors");
-var Game = ("./game.js");
+var Game = require("./game.js");
 
 colors.setTheme({
 	silly: 'rainbow',
@@ -28,7 +28,18 @@ inquirer.prompt(gameTypePrompt).then(response => {
 	var gameType = response.gameType;
 	console.log(gameType);
 	
-	if(gameType === "Superheroes") {
+	switch(gameType) {
+		case "Superheroes":
+		var displayWord = Game.superheroes();
+		break;
 
-	}
+		case "Classmates":
+		var displayWord = Game.classmates();
+		break;
+
+		default:
+		console.log("That game type is not yet supported.")
+	};
+
+	console.log(displayWord);
 });

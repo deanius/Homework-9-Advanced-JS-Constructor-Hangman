@@ -8,4 +8,12 @@ function Letter(letter) {
 	};
 };
 
+Letter.prototype.showLetter = function() {
+	if (this.guessed === true) {
+		return this.letter;
+	} else {
+		return "_"
+	};
+};
+
 module.exports = Letter;
