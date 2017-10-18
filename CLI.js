@@ -26,20 +26,19 @@ gameTypePrompt = {
 
 inquirer.prompt(gameTypePrompt).then(response => {
 	var gameType = response.gameType;
-	console.log(gameType);
 	
 	switch(gameType) {
 		case "Superheroes":
-		var displayWord = Game.superheroes();
+		var word = Game.superheroes();
 		break;
 
 		case "Classmates":
-		var displayWord = Game.classmates();
+		var word = Game.classmates();
 		break;
 
 		default:
 		console.log("That game type is not yet supported.")
 	};
 
-	console.log(displayWord);
+	console.log(word);
 });

@@ -1,20 +1,30 @@
-// var Letter = require("./Letter.js");
+var Letter = require("./Letter.js");
 
-function Word() {
-	// if(!wordChosen) {
-	// 	for (var i = 0; i < word.length; i++) {
-	// 		this[i] = new Letter(word[i]);
-	// 	};
-	// };
-	this.chosenWord = ""
-};
+function Word(){};
 
-Word.prototype.chooseWord = function(wordList) {
-	this.chosenWord = wordList[Math.floor(Math.random() * wordList.length)];
-};
+Word.prototype.displayWord = function(chosenWord) {
+	for (var i = 0; i < chosenWord.length; i++) {
+		this[i] = new Letter(chosenWord[i]);
+	};
 
-Word.prototype.getLetters = function() {
-	console.log(this.chosenWord);
+	var lettersArray = [];
+
+	for (letter in this) {
+		if (typeof this[letter] === "object"){
+			var thisLetter = this[letter].value;
+			var guessed = this[letter].guessed;
+
+			if(guessed) {
+				var displayLetter = thisLetter;
+			} else {
+				var displayLetter = "_";
+			};
+
+			lettersArray.push(displayLetter);
+		};
+	};
+
+	this.displayWord = lettersArray.join(" ");
 };
 
 module.exports = Word;
