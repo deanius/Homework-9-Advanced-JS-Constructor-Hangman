@@ -10,10 +10,8 @@ function hangman () {
 	// whether or not it's been guessed correctly
 	var chosenWord = possibleWords[Math.floor(Math.random() * possibleWords.length)];
 	var Word = require("./Word.js");
-	var word = new Word(chosenWord);
-	
+	var wordObject = new Word(chosenWord);
 	console.log(chosenWord);
-	// console.log(word);
 
 	// display the word based on the booleans in the letter objects within
 	// display the list of incorrect letters guessed (starts empty)
@@ -23,32 +21,97 @@ function hangman () {
 	// if incorrect, add to list of incorrect letters guessed
 	// check if all letter booleans are true
 	// recursion/loop until all the letter booleans are true
-
 	// once all letter booleans are true, game is over
+	displayGame(wordObject);
 
+};
+
+// this function is recursive
+function displayGame (input) {
+	// takes wordObject as input and saves it
+	var wordObject = input;
+
+	// creates empty wordArray
 	var wordArray = [];
-	for(letter in word) {
-		var thisLetter = word[letter].value;
-		var thisBoolean = word[letter].guessed;
-		
+
+	var guessedLetter = null;
+	// goes through each letter in wordObject
+	
+	// set noLettersLeft to true
+	var noLettersLeft = true;
+	
+	for(letter in wordObject) {
+		// saves letter as thisLetter
+		var thisLetter = wordObject[letter].value;
+		// saves guessed value as thisBoolean
+		var thisBoolean = wordObject[letter].guessed;
+
+		// if thisBoolean is true
 		if(thisBoolean) {
+			// display the corresponding character
 			var hiddenLetter = thisLetter;	
 		} else {
+			// otherwise, display it as _
 			var hiddenLetter = "_";
 		};
+		// push the letters to the wordArray
 		wordArray.push(hiddenLetter);
-	};
-	var displayedWord = wordArray.join(" ");
 
-	var guess = {
+		// if there are any unguessed letters,
+		if(thisBoolean === false) {
+			// set noLettersLeft to false
+			noLettersLeft = false;
+		};
+	};
+
+	// turn wordArray into a string and display it
+	var displayedWord = wordArray.join(" ");
+	console.log(displayedWord);
+
+	console.log(`noLettersLeft: ${noLettersLeft}`);
+	// if there are no letters left
+	if(noLettersLeft === true) {
+		// run gameOver function
+		gameOver();
+	} else if(noLettersLeft === false) {
+		// else, run guessLetter function
+		guessLetter(wordObject);
+	};
+};
+
+function gameOver() {
+	console.log("game over");
+};
+
+function guessLetter(input) {
+	var wordObject = input;
+
+	var guessPrompt = {
 		type: "input",
-		message: `\n${displayedWord}\nGuess a letter!`,
+		message: `Guess a letter!`,
 		name: "guessedLetter"
 	};
 
-	inquirer.prompt(guess).then(response => {
-		console.log(response.guessedLetter)
-	});
+	inquirer.prompt(guessPrompt).then(response => {
+		var guessedLetter = response.guessedLetter;
+		var guessedBoolean = wordObject[letter].guessed;
+
+		// set noLettersLeft to true
+		var noLettersLeft = true;
+		
+		for(letter in wordObject) {
+			var thisLetter = wordObject[letter].value;
+			var thisBoolean = wordObject[letter].guessed;
+
+			if(guessedLetter.toLowerCase() === thisLetter.toLowerCase()) {
+				wordObject[letter].guessed = true;
+			};
+		}; // for(letter in word){}
+		
+		displayGame(wordObject);
+	}); //inquirer.guessPrompt()
 };
+
+
 
 hangman();
