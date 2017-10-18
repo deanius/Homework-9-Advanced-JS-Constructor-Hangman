@@ -15,5 +15,8 @@
   "bugs": {
     "url": "https://github.com/youknowme786/Homework-9-Advanced-JS-Constructor-Hangman/issues"
   },
-  "homepage": "https://github.com/youknowme786/Homework-9-Advanced-JS-Constructor-Hangman#readme"
+  "homepage": "https://github.com/youknowme786/Homework-9-Advanced-JS-Constructor-Hangman#readme",
+  "dependencies": {
+    "inquirer": "^3.3.0"
+  }
 }
