@@ -24,7 +24,7 @@ Word.prototype.displayWord = function(chosenWord) {
 		};
 	};
 
-	this.displayWord = lettersArray.join(" ");
+	return displayWord = lettersArray.join(" ");
 };
 
 module.exports = Word;
