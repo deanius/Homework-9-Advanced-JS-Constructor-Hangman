@@ -17,6 +17,7 @@
   },
   "homepage": "https://github.com/youknowme786/Homework-9-Advanced-JS-Constructor-Hangman#readme",
   "dependencies": {
+    "colors": "^1.1.2",
     "inquirer": "^3.3.0"
   }
 }
