@@ -68,7 +68,6 @@ function displayGame (input) {
 	var displayedWord = wordArray.join(" ");
 	console.log(displayedWord);
 
-	console.log(`noLettersLeft: ${noLettersLeft}`);
 	// if there are no letters left
 	if(noLettersLeft === true) {
 		// run gameOver function
@@ -77,10 +76,6 @@ function displayGame (input) {
 		// else, run guessLetter function
 		guessLetter(wordObject);
 	};
-};
-
-function gameOver() {
-	console.log("game over");
 };
 
 function guessLetter(input) {
@@ -112,6 +107,23 @@ function guessLetter(input) {
 	}); //inquirer.guessPrompt()
 };
 
+function gameOver() {
+	var restartPrompt = {
+		type: "list",
+		message: `Congrats!\nPlay again?`,
+		choices: ["Yes", "No"],
+		name: "restartChoice"
+	};
 
+	inquirer.prompt(restartPrompt).then(response => {
+		var restartChoice = response.restartChoice;
+		
+		if(restartChoice === "Yes") {
+			hangman();
+		} else {
+			console.log("game over");
+		}
+	}); //inquirer.guessPrompt()
+};
 
 hangman();

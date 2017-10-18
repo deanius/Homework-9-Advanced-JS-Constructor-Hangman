@@ -1,5 +1,6 @@
 function Letter(letter) {
 	this.value = letter;
+
 	if(letter === " " || letter === "-") {
 		this.guessed = true;
 	} else {

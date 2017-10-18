@@ -6,8 +6,6 @@ function Word(word, wordChosen) {
 			this[i] = new Letter(word[i]);
 		};
 	};
-
-
 };
 
 module.exports = Word;
