@@ -2,7 +2,7 @@ var Word = require("./Word.js");
 
 function Superhero () {
 	// console.log("Superhero(){}");
-	var superheroWords = ["Wolverine", "Batman", "Black Panther", "Superman", "Iron Man", "Aquaman", "Wonder Woman", "Hawkeye", "Spider-Man", "Daredevil", "Green Arrow", "Black Canary", "Captain America", "Batgirl", "Hellboy", "Hulk", "Iron Fist", "Catwoman", "Elektra", "Ghost Rider", "Thor", "Robin", "Silver Surfer", "The Human Torch", "Black Widow", "Professor Xavier", "Beast", "Black Lightning", "Captain Marvel", "Doctor Strange", "The Vision", "Ant-Man", "Supergirl", "Captain Planet"];
+	var superheroWords = ["Imran", "Eva", "Jean-Christophe", "Nicole", "Ali", "Grant", "Andrew", "Wolverine", "Batman", "Black Panther", "Superman", "Iron Man", "Aquaman", "Wonder Woman", "Hawkeye", "Spider-Man", "Daredevil", "Green Arrow", "Black Canary", "Captain America", "Batgirl", "Hellboy", "Hulk", "Iron Fist", "Catwoman", "Elektra", "Ghost Rider", "Thor", "Robin", "Silver Surfer", "The Human Torch", "Black Widow", "Professor Xavier", "Beast", "Black Lightning", "Captain Marvel", "Doctor Strange", "The Vision", "Ant-Man", "Supergirl", "Captain Planet"];
 	this.targetWord = superheroWords[Math.floor(Math.random() * superheroWords.length)];
 	
 	this.word = new Word(this.targetWord);
@@ -48,21 +48,12 @@ Superhero.prototype.evaluateLetter = function(guessedLetter) {
 
 Superhero.prototype.evaluateGameState = function () {
 	if(this.displayWord.indexOf("_") === -1) {
-		console.log("\nYou win!".green);
+		console.log("\nYou win!\n".green);
 		this.gameOver = true;
 	} else if (this.livesRemaining < 1) {
-		console.log("\nYou lose!".red);
+		console.log("\nYou lose!\n".red);
 		this.gameOver = true;
 	};
 }; // evaluateGameState(){}
 
-function Classmate() {
-	var classmateWords = ["Imran", "Eva", "Jean-Christophe", "Nicole", "Ali", "Grant", "Andrew"];
-	
-	console.log("That game type is not yet supported.");
-};
-
-module.exports = {
-	Superhero: Superhero,
-	Classmate: Classmate
-};
+module.exports = Superhero;
