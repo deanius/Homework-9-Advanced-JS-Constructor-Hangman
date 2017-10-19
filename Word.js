@@ -1,12 +1,12 @@
 var Letter = require("./Letter.js");
 
-function Word(){};
-
-Word.prototype.displayWord = function(chosenWord) {
-	for (var i = 0; i < chosenWord.length; i++) {
-		this[i] = new Letter(chosenWord[i]);
+function Word(targetWord){
+	for (var i = 0; i < targetWord.length; i++) {
+		this[i] = new Letter(targetWord[i]);
 	};
+};
 
+Word.prototype.displayWord = function() {
 	var lettersArray = [];
 
 	for (letter in this) {
