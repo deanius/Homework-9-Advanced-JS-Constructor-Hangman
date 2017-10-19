@@ -1,9 +1,11 @@
 var Word = require("./Word.js");
 
-function Superhero () {
+function Superhero (category) {
 	// console.log("Superhero(){}");
-	var superheroWords = ["Imran", "Eva", "Jean-Christophe", "Nicole", "Ali", "Grant", "Andrew", "Wolverine", "Batman", "Black Panther", "Superman", "Iron Man", "Aquaman", "Wonder Woman", "Hawkeye", "Spider-Man", "Daredevil", "Green Arrow", "Black Canary", "Captain America", "Batgirl", "Hellboy", "Hulk", "Iron Fist", "Catwoman", "Elektra", "Ghost Rider", "Thor", "Robin", "Silver Surfer", "The Human Torch", "Black Widow", "Professor Xavier", "Beast", "Black Lightning", "Captain Marvel", "Doctor Strange", "The Vision", "Ant-Man", "Supergirl", "Captain Planet"];
-	this.targetWord = superheroWords[Math.floor(Math.random() * superheroWords.length)];
+	this.Superheroes = ["Wolverine", "Batman", "Black Panther", "Superman", "Iron Man", "Aquaman", "Wonder Woman", "Hawkeye", "Spider-Man", "Daredevil", "Green Arrow", "Black Canary", "Captain America", "Batgirl", "Hellboy", "Hulk", "Iron Fist", "Catwoman", "Elektra", "Ghost Rider", "Thor", "Robin", "Silver Surfer", "The Human Torch", "Black Widow", "Professor Xavier", "Beast", "Black Lightning", "Captain Marvel", "Doctor Strange", "The Vision", "Ant-Man", "Supergirl", "Captain Planet"];
+	this.Classmates = ["Imran", "Eva", "Jean-Christophe", "Nicole", "Ali", "Grant", "Andrew", "Taiwo", "Brett", "Stephanie", "Esdras", "Dean", "Scott", "Ola", "Josie", "Kaitlyn", "Casey", "Jason", "Dartaniel", "Julia", "Edge", "Yamini", "Alina", "Ammad", "Humera", "Julian", "Max", "Michael", "Nicholas"];
+
+	this.targetWord = this[category][Math.floor(Math.random() * this[category].length)];
 	
 	this.word = new Word(this.targetWord);
 	this.displayWord = this.word.displayWord();

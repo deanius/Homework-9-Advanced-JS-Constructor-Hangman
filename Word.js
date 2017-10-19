@@ -29,10 +29,9 @@ Word.prototype.displayWord = function() {
 
 Word.prototype.checkIfWordContains = function(guessedLetter) {
 	for(letter in this) {
-		if (typeof this[letter] === "object"){
-			if(this[letter].value.toUpperCase() === guessedLetter) {
+		if (typeof this[letter] === "object"
+			&& this[letter].value.toUpperCase() === guessedLetter){
 				this[letter].guessed = true;
-			};
 		};
 	};
 };

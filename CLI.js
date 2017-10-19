@@ -1,6 +1,6 @@
 var inquirer = require("inquirer");
 var colors = require("colors");
-var Superhero = require("./game.js");
+var Game = require("./game.js");
 
 colors.setTheme({
 	silly: 'rainbow',
@@ -16,27 +16,18 @@ colors.setTheme({
 });
 
 function newGame () {
-
+	// prompt user to pick a category
 	readyPrompt = {
 		type: "list",
-		message: "Ready?".yellow,
-		choices: ["Yes!", "No"],
-		name: "ready"
+		message: "Choose a category:".yellow,
+		choices: ["Superheroes", "Classmates"],
+		name: "category"
 	};
 
 	inquirer.prompt(readyPrompt).then(response => {
-
-		if(response.ready === "Yes!") {
-			var game = new Superhero();
-		} else {
-			return;
-		};
-
-		if(game) { // FOR DEBUGGING
-			// console.log(game);
-			console.log(game.targetWord);
-		}; // FOR DEBUGGING
-
+		// create new game object using the user's response
+		var game = new Game(response.category);
+		// display 
 		console.log(`\n  ${game.displayWord}\n`);
 		
 		function guessLoop () {
