@@ -37,7 +37,7 @@ Game.prototype.evaluateLetter = function(guessedLetter) {
 
 		// if the letter is correct
 		} else {
-			this.word.checkIfWordContains(guessedLetter);
+			    this.word.checkIfWordContains(guessedLetter);
 			this.displayWord = this.word.displayWord();
 			console.log("Your guess was correct!".green);
 		};
