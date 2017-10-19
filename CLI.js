@@ -46,8 +46,7 @@ function newGame () {
 			// console.log(game.targetWord);
 		}; // FOR DEBUGGING
 
-		console.log(`\n  ${game.displayWord.red}\n`);
-		var gameOver = false;
+		console.log(`\n  ${game.displayWord}\n`);
 		
 		function guessALetter() {
 			var guessALetterPrompt = {
@@ -61,19 +60,23 @@ function newGame () {
 
 		var guessAllLetters = Promise.resolve();
 
-		for (var i = 0; i < 3; i++) {
-		// while(!gameOver) {
-			guessAllLetters = guessAllLetters
-				.then(guessALetter)
-				.then(response => game.evaluateLetter(response.guessedLetter.toUpperCase()))
-				.then(() => console.log(`\nIncorrect Guesses: ${game.displayIncorrectGuesses}`))
-				.then(() => console.log(`Lives Remaining: ${game.livesRemaining}`))
-				.then(() => console.log(`\n  ${game.displayWord}\n`))
-		};
+		function guessLoop () {
+			if (game.gameOver === false) {
 
-		guessAllLetters.then(() => {
-			console.log("Game over!")
-		});
+				guessAllLetters = guessAllLetters
+					.then(guessALetter)
+					.then(response => game.evaluateLetter(response.guessedLetter.toUpperCase()))
+					.then(() => console.log(`\nIncorrect Guesses: ${game.displayIncorrectGuesses}`))
+					.then(() => console.log(`Lives Remaining: ${game.livesRemaining}`))
+					.then(() => console.log(`\n  ${game.displayWord}\n`))
+					.then(() => game.evaluateGameState())
+					.then(() => guessLoop())
+			} else {
+				console.log("\nPlay again?");
+			}
+		}; // guessLoop(){}
+
+		guessLoop();
 
 	}); // inquirer.gameTypePrompt()
 }; // newGame(){}
