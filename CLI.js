@@ -65,8 +65,10 @@ function newGame () {
 		// while(!gameOver) {
 			guessAllLetters = guessAllLetters
 				.then(guessALetter)
-				.then(response => game.evaluateLetter(response.guessedLetter))
-				.then(() => console.log(`\n  ${game.displayWord.red}\n`))
+				.then(response => game.evaluateLetter(response.guessedLetter.toUpperCase()))
+				.then(() => console.log(`\nIncorrect Guesses: ${game.displayIncorrectGuesses}`))
+				.then(() => console.log(`Lives Remaining: ${game.livesRemaining}`))
+				.then(() => console.log(`\n  ${game.displayWord}\n`))
 		};
 
 		guessAllLetters.then(() => {

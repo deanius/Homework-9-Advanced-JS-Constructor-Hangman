@@ -15,9 +15,9 @@ Word.prototype.displayWord = function() {
 			var guessed = this[letter].guessed;
 
 			if(guessed) {
-				var displayLetter = thisLetter;
+				var displayLetter = thisLetter.green;
 			} else {
-				var displayLetter = "_";
+				var displayLetter = "_".cyan;
 			};
 
 			lettersArray.push(displayLetter);
@@ -25,6 +25,16 @@ Word.prototype.displayWord = function() {
 	};
 
 	return displayWord = lettersArray.join(" ");
+};
+
+Word.prototype.checkIfWordContains = function(guessedLetter) {
+	for(letter in this) {
+		if (typeof this[letter] === "object"){
+			if(this[letter].value.toUpperCase() === guessedLetter) {
+				this[letter].guessed = true;
+			};
+		};
+	};
 };
 
 module.exports = Word;

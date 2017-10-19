@@ -1,5 +1,4 @@
 var Word = require("./Word.js");
-var colors = require("colors");
 
 function Superhero () {
 	// console.log("Superhero(){}");
@@ -8,22 +7,39 @@ function Superhero () {
 	
 	this.word = new Word(this.targetWord);
 	this.displayWord = this.word.displayWord();
+
+	this.guesses = [];
+	this.incorrectGuesses = [];
+	this.displayIncorrectGuesses = "";
+	this.livesRemaining = 10;
 };
 
 Superhero.prototype.evaluateLetter = function(guessedLetter) {
 	// for validating that key presses are actually letters
-	var alphabet = ["a","b","c","d","e","f","g","h","i","j","k","l","m","n","o","p","q","r","s","t","u","v","w","x","y","z"];
-
-	console.log("evaluateLetter");
-	console.log(`you guessed: ${guessedLetter}`);
+	var alphabet = ["A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T","U","V","W","X","Y","Z"];
 	
-	var yourGuess = guessedLetter.toLowerCase()
-	if(alphabet.indexOf(yourGuess) > -1) {
-		console.log("that's a letter".green);
+	var targetWord = this.targetWord.toUpperCase();
+	
+	if(alphabet.indexOf(guessedLetter) === -1) {
+		console.log("Please input a letter.".warn);
+	} else{
+		
+		if (this.guesses.indexOf(guessedLetter) > -1) {
+			console.log("You've already guessed that letter.".warn);
 
-	} else {
-		console.log("Please input a letter.".error);
-	}
+		} else if(targetWord.indexOf(guessedLetter) === -1) {
+			this.incorrectGuesses.push(guessedLetter.red);
+			this.displayIncorrectGuesses = this.incorrectGuesses.join(" ");
+			this.livesRemaining--;
+
+		} else {
+			this.word.checkIfWordContains(guessedLetter);
+			this.displayWord = this.word.displayWord();
+		};
+
+		this.guesses.push(guessedLetter);
+	};
+
 };
 
 function Classmate() {
