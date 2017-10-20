@@ -6,14 +6,19 @@ function Letter(letter) {
 	} else {
 		this.guessed = false;
 	};
-};
+}; // Letter(){}
 
 Letter.prototype.showLetter = function() {
-	if (this.guessed === true) {
-		return this.letter;
+	if (this.guessed) {
+		return this.value.green;
 	} else {
-		return "_"
+		return "_".cyan;
 	};
-};
+}; // showLetter(){}
+
+Letter.prototype.isThisLetter = function(guessedLetter) {
+	if(this.value.toUpperCase() === guessedLetter)
+		this.guessed = true;
+}; // markLetterGuessed(){}
 
 module.exports = Letter;

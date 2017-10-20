@@ -1,6 +1,6 @@
 var inquirer = require("inquirer");
 var colors = require("colors");
-var Game = require("./game.js");
+var Game = require("./Game.js");
 
 colors.setTheme({
 	silly: 'rainbow',
@@ -27,17 +27,16 @@ function newGame () {
 	inquirer.prompt(readyPrompt).then(response => {
 		// create new game object using the user's response
 		var game = new Game(response.category.toLowerCase());
-		// display 
+		// display empty word
 		console.log(`\n  ${game.displayWord}\n`);
-		
+		// initiate the user input loop
 		guessLoop(game);
 
 	}); // inquirer.gameTypePrompt()
 }; // newGame(){}
 
 function guessLoop(game) {
-	// var game = game;
-
+	// query guess
 	function guessALetter() {
 		var guessALetterPrompt = {
 			type: "input",
@@ -46,10 +45,12 @@ function guessLoop(game) {
 		};
 
 		return inquirer.prompt(guessALetterPrompt)
-	};
+	}; // guessALetter(){}
 
+	// create promise
 	var guessAllLetters = Promise.resolve();
 
+	// if game is not over, run input loop using promise
 	if (game.gameOver === false) {
 
 		guessAllLetters = guessAllLetters
@@ -60,7 +61,9 @@ function guessLoop(game) {
 		.then(() => console.log(`\n  ${game.displayWord}\n`))
 		.then(() => game.evaluateGameState())
 		.then(() => guessLoop(game))
+
 	} else {
+		// if game is over, prompt to play again
 		var playAgainPrompt = {
 			type: "list",
 			message: "Play again?",
@@ -75,8 +78,9 @@ function guessLoop(game) {
 				return;
 			};
 		});
-	};
+	}; // if/else gameOver(){}
 }; // guessLoop(){}
 
+// initialize game
 console.log("Welcome to Hangman!".silly.bold);
 newGame();

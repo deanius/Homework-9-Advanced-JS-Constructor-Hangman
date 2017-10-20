@@ -1,39 +1,29 @@
 var Letter = require("./Letter.js");
 
 function Word(targetWord){
+	// generate letter objects based on selected word
 	for (var i = 0; i < targetWord.length; i++) {
 		this[i] = new Letter(targetWord[i]);
 	};
-};
+}; // Word(){}
 
 Word.prototype.displayWord = function() {
+	// create empty array
 	var lettersArray = [];
-
+	// populate array with letters or underscores
 	for (letter in this) {
-		if (typeof this[letter] === "object"){
-			var thisLetter = this[letter].value;
-			var guessed = this[letter].guessed;
-
-			if(guessed) {
-				var displayLetter = thisLetter.green;
-			} else {
-				var displayLetter = "_".cyan;
-			};
-
-			lettersArray.push(displayLetter);
-		};
+		if (this[letter].showLetter)
+			lettersArray.push(this[letter].showLetter());
 	};
-
-	return displayWord = lettersArray.join(" ");
-};
+	// return a string of letters or underscores
+	return lettersArray.join(" ");
+}; // displayWord(){}
 
 Word.prototype.checkIfWordContains = function(guessedLetter) {
 	for(letter in this) {
-		if (typeof this[letter] === "object"
-			&& this[letter].value.toUpperCase() === guessedLetter){
-				this[letter].guessed = true;
-		};
+		if (this[letter].isThisLetter)
+			this[letter].isThisLetter(guessedLetter);
 	};
-};
+}; // checkIfWordContains(){}
 
 module.exports = Word;
