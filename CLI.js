@@ -28,6 +28,7 @@ function newGame () {
 		// create new game object using the user's response
 		var game = new Game(response.category.toLowerCase());
 		// display empty word
+		clearScreen();
 		console.log(`\n  ${game.displayWord}\n`);
 		// initiate the user input loop
 		guessLoop(game);
@@ -55,7 +56,10 @@ function guessLoop(game) {
 
 		guessAllLetters = guessAllLetters
 		.then(guessALetter)
-		.then(response => game.evaluateLetter(response.guessedLetter.toUpperCase()))
+		.then(response => {
+			clearScreen();
+			game.evaluateLetter(response.guessedLetter.trim().toUpperCase())
+		})
 		.then(() => console.log(`\nIncorrect Guesses: ${game.displayIncorrectGuesses}`))
 		.then(() => console.log(`Lives Remaining: ${game.livesRemaining}`))
 		.then(() => console.log(`\n  ${game.displayWord}\n`))
@@ -73,14 +77,21 @@ function guessLoop(game) {
 
 		inquirer.prompt(playAgainPrompt).then(response => {
 			if(response.ready === "Yes!") {
+				clearScreen();
 				newGame();
 			} else {
+				clearScreen();
 				return;
 			};
 		});
 	}; // if/else gameOver(){}
 }; // guessLoop(){}
 
+function clearScreen () {
+	process.stdout.write('\x1B[2J\x1B[0f');
+}; // clearScreen(){}
+
 // initialize game
+clearScreen();
 console.log("Welcome to Hangman!".silly.bold);
 newGame();
